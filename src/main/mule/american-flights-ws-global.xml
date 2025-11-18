@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="38956857-4d3e-452e-b7f3-2bb369febb17" >
+		<db:my-sql-connection host="${secure::db.mysql.host}" port="${secure::db.mysql.port}" user="${secure::db.mysql.user}" password="${secure::db.mysql.password}" database="${secure::db.mysql.database}" />
+	</db:config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4d0315b9-f787-4047-97a6-d6abd6ab810b" >
+		<http:listener-connection host="localhost" port="8089" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="6fbf9248-de31-44eb-8b23-ac118a8ef985" file="config/${env}-properties.yaml" />
+	<global-property doc:name="Global Property" doc:id="ef28ab8d-18da-4b02-b687-ca3872f642e5" name="env" value="local" />
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="d5a1357a-8cd4-4e97-8545-6c9e8b155cf1" file="config\local-properties.yaml" key='${runtime.property}'>
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+</mule>

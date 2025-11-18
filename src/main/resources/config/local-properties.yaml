@@ -1,0 +1,9 @@
+
+
+db:
+  mysql:
+    host: "mudb.mule-training.com"
+    port: "3306"
+    user: "![80NWtBpoQzs=]"
+    password: "![80NWtBpoQzs=]"
+    database: "training"
