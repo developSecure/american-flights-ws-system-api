@@ -120,9 +120,9 @@ output application/json
         </error-handler>
     </flow>
     <flow name="get:\flights:american-flights-ws-system-api-config">
-		<flow-ref doc:name="getAmericanFlightsSubFlow" doc:id="b6dc98a9-6094-4ce3-aaf4-74584f3708f6" name="getAmericanFlightsSubFlow"/>
+		<flow-ref doc:name="getAmericanFlightsSubFlow" doc:id="2c35988c-24a4-465c-b20a-f009bffb4c81" name="getAmericanFlightsSubFlow"/>
     </flow>
     <flow name="get:\flights\(ID):american-flights-ws-system-api-config">
-		<flow-ref doc:name="getAmericanFlightFlow" doc:id="29af2993-8108-443a-85b0-46000fa69af7" name="getAmericanFlightFlow"/>
+		<flow-ref doc:name="getAmericanFlightFlow" doc:id="531fa987-df4e-4cd6-afb3-4dd8a0903c89" name="getAmericanFlightFlow"/>
     </flow>
 </mule>
