@@ -76,18 +76,5 @@ output application/json
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Get American Flight by ID success response" doc:id="cd899865-7bd9-4d05-8745-318532d46fc4" message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	message: "Get American Flight by ID success response"&#10;}]' />
-		<error-handler>
-			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="85b1daba-5c61-478c-b2d0-23f6d8d73cfd" >
-				<set-variable value="#[if (message.attributes.statusCode != null) message.attributes.statusCode as Number else 404]" doc:name="httpStatus" doc:id="a46d67bd-809f-4ab8-a98e-92869f3926d6" variableName="httpStatus" />
-				<ee:transform doc:name="error" doc:id="072aee24-abf8-42cf-bfc4-c0362f1074b3">
-				<ee:message>
-					<ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-error.description]]></ee:set-payload>
-				</ee:message>
-			</ee:transform>
-			</on-error-propagate>
-		</error-handler>
 	</flow>
 </mule>
