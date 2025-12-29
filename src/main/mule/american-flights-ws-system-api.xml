@@ -10,7 +10,9 @@
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="american-flights-ws-system-api-config"/>
+        <flow-ref doc:name="initialLoggingSubFlow" doc:id="7fdd411c-dcfb-44e3-8f98-a0fdc86069ad" name="initialLoggingSubFlow" />
+		<apikit:router config-ref="american-flights-ws-system-api-config"/>
+		<flow-ref doc:name="finalisingLoggingSubFlow" doc:id="2d6115c6-fa47-47af-b3a5-7c30987a7a2a" name="finalisingLoggingSubFlow" />
 		<error-handler ref="global-error-handler"/>
     </flow>
     <flow name="american-flights-ws-system-api-console">

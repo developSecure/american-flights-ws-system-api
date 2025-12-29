@@ -9,7 +9,14 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
 	<sub-flow name="getAmericanFlightsSubFlow" doc:id="2ea12ee8-36f4-4b0b-9167-6581c2eda2a1" >
 		<set-variable value="#[attributes.queryParams]" doc:name="queryParams" doc:id="d21bd8b9-b7dc-4042-bc29-d9a8250d309a" variableName="queryParams" />
-		<logger level="INFO" doc:name="Get American Flights request" doc:id="5be57e77-eb97-4ec5-b2cb-734eca9ebb7a" message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	message: "Get American Flights request",&#10;	(destination: vars.queryParams.destination) if(vars.queryParams.destination != null)&#10;}]'/>
+		<set-variable value='#[%dw 2.0
+output application/json
+---
+{
+	message: "Get American Flights request",
+	(destination: vars.queryParams.destination) if(vars.queryParams.destination != null)
+}]' doc:name="logMessage - Get American Flights request" doc:id="788a49fd-be97-4d7f-8d43-0cd66006a9bb" variableName="logMessage"/>
+		<flow-ref doc:name="commonLoggingSubFlow" doc:id="3158d605-f1c3-4fe3-81ce-02bf90eae630" name="commonLoggingSubFlow"/>
 		<ee:transform doc:name="sql" doc:id="078fdf27-7350-4fdd-a540-68f65b4a9eb8" >
 			<ee:message >
 			</ee:message>
@@ -44,11 +51,25 @@ payload map (flight) -> {
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Get American Flights response" doc:id="4a855626-ecd2-4468-935b-c10074de849b" message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	message: "Get American Flights request",&#10;	(destination: vars.queryParams.destination) if(vars.queryParams.destination != null),&#10;	fetchedRecords: sizeOf(payload default [])&#10;}]' />
+		<set-variable value='#[%dw 2.0
+output application/json
+---
+{
+	message: "Get American Flights DB response ",
+	(destination: vars.queryParams.destination) if(vars.queryParams.destination != null),
+	fetchedRecords: sizeOf(payload default [])
+}]' doc:name="logMessage - Get American Flights request1" doc:id="f3b90e89-5bf3-4ca8-9b53-299b8a57669c" variableName="logMessage" />
 	</sub-flow>
 	<flow name="getAmericanFlightFlow" doc:id="324542bd-31a4-4d77-a4de-70154a2a4671" >
 		<set-variable value="#[attributes.uriParams.ID]" doc:name="flightId" doc:id="32165513-57fa-4390-bbe8-4e8cc564f95f" variableName="flightId" />
-		<logger level="INFO" doc:name="Get American Flight by ID request" doc:id="74a417d6-ec4d-442c-93f2-0d56d3b2f130" message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	message: "Get American Flight by ID request",&#10;	flightId: vars.flightId&#10;}]' />
+		<set-variable value='#[%dw 2.0
+output application/json
+---
+{
+	message: "Get American Flight by Id request",
+	flightId: vars.flightId
+}]' doc:name="logMessage - Get American Flight by Id request" doc:id="327a9be5-2083-46e6-8b86-502602505b78" variableName="logMessage" />
+		<flow-ref doc:name="commonLoggingSubFlow" doc:id="e5bb764a-86dc-4bdb-91be-48812831d62a" name="commonLoggingSubFlow" />
 		<db:select doc:name="Select" doc:id="93e50de7-3a07-4f29-a7e9-e807ec957163" config-ref="Database_Config">
 			<db:sql><![CDATA[SELECT * FROM american
 WHERE ID = :Id]]></db:sql>
@@ -75,6 +96,11 @@ output application/json
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Get American Flight by ID success response" doc:id="cd899865-7bd9-4d05-8745-318532d46fc4" message='#[%dw 2.0&#10;output application/json&#10;---&#10;{&#10;	message: "Get American Flight by ID success response"&#10;}]' />
+		<set-variable value='#[%dw 2.0
+output application/json
+---
+{
+	message: "Get American Flight by Id success response"
+}]' doc:name="logMessage - Get American Flight by Id response" doc:id="c849cc4d-4da0-4475-ae69-19a2a756e22b" variableName="logMessage" />
 	</flow>
 </mule>

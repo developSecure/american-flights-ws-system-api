@@ -9,6 +9,7 @@
         <secure-properties:encrypt algorithm="Blowfish" />
     </secure-properties:config>
 	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="9964bb02-7c4e-4b31-82c5-83dc20d25949" name="american-flights-ws-system-api-config" api="american-flights-ws-system-api.raml" />
-	<import doc:name="Import" doc:id="b766c0ea-35cb-4c82-8fab-77877fc809d2" file="mule-common-error-handler.xml" />
+	<import doc:name="mule-common-error-handler" doc:id="b766c0ea-35cb-4c82-8fab-77877fc809d2" file="mule-common-error-handler.xml" />
 	<configuration doc:name="global-error-handler" doc:id="40fec914-2622-4136-8969-e7c373a408b1" defaultErrorHandler-ref="global-error-handler" />
+	<import doc:name="mule-common-logging" doc:id="a99d1258-44e3-4c20-b0fe-c816df3af801" file="mule-common-logging.xml" />
 </mule>
