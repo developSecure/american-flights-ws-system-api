@@ -4,8 +4,6 @@ api:
 
 http:
   listener:
-    host: "0.0.0.0"
-    port: "8089"
     path: "american-flights-sa/api/${api.version}"
     timeout: "120000" #2 min
 
